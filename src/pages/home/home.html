@@ -1,17 +1,32 @@
-<ion-header>
+<ion-header>  
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>
+      🎂 Birthdays 🎉
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="showDetail()">
+          <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-</ion-content>
+<ion-content class="home" *mobxAutorun>  
+  <ion-item-group>
+    <ion-item-divider color="light">{{ today | date:'fullDate' }}</ion-item-divider>
+    <ion-item *ngIf="store.birthdaysToday.length == 0">
+      <div>No cake 🎂 today...</div>
+    </ion-item>
+    <ion-item *ngFor="let birthday of store.birthdaysToday">
+      {{ birthday.name }} is {{ birthday.age}} years old today 🎂
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">All Birthdays</ion-item-divider>
+    <button ion-item *ngFor="let birthday of store.birthdays" (click)="showDetail(birthday)">
+        <div>{{ birthday.name }}</div>
+        <div item-end>{{ birthday.date | date:'yMMMMd' }}</div>
+    </button>
+  </ion-item-group>
+</ion-content> 

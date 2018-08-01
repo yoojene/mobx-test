@@ -11,6 +11,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { MobxAngularModule } from 'mobx-angular';  
+import { BirthdayStore } from '../stores/birthday.store';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -34,6 +37,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    BirthdayStore,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
